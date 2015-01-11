@@ -11,21 +11,26 @@ var crypto = require('crypto');
 var zlib = require('zlib');
 var mkdirp = require('mkdirp');
 
+function getSHA1(data) {
+  var shasum = crypto.createHash('sha1');
+  shasum.update(data);
+  return shasum.digest('hex');
+}
+
 function createBlob(filePath) {
   // git command must be executed from the root directory
   var objectStore = process.cwd() + '/.git/objects'
 
-  var shasum = crypto.createHash('sha1');
   var fileContent = ""
 
   var s = fs.ReadStream(filePath);
   s.on('data', function(d) {
-    shasum.update(d);
     fileContent += d;
   });
 
   s.on('end', function() {
-    var sha1 = shasum.digest('hex');
+
+    var sha1 = getSHA1(fileContent);
 
     var blobDirectory = sha1.slice(0,2);
     var blobName = sha1.slice(2);
