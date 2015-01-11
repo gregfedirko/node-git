@@ -14,7 +14,6 @@ var mkdirp = require('mkdirp');
 function createBlob(filePath) {
   // git command must be executed from the root directory
   var objectStore = process.cwd() + '/.git/objects'
-  console.log(objectStore);
 
   var shasum = crypto.createHash('sha1');
   var fileContent = ""
@@ -27,19 +26,19 @@ function createBlob(filePath) {
 
   s.on('end', function() {
     var sha1 = shasum.digest('hex');
-    
+
     var blobDirectory = sha1.slice(0,2);
     var blobName = sha1.slice(2);
 
     zlib.deflate(fileContent, function(err, buffer) {
       if (err) {throw err};
       var blobContents = (buffer.toString('base64'));
-      var blobDirectory = objectStore + '/' + blobDirectory;
+      var blobPath = objectStore + '/' + blobDirectory;
 
-      mkdirp(blobDirectory, function(err) {
+      mkdirp(blobPath, function(err) {
         if (err) {throw err};
 
-        fs.writeFile(blobDirectory + '/' + blobName, blobContents, function(err) {
+        fs.writeFile(blobPath + '/' + blobName, blobContents, function(err) {
           if (err) {throw err};
         });
       }); 

@@ -9,10 +9,12 @@ var createBlob = require('./components/createBlob.js');
 
 var commandMap = {
   init: init,
-  createBlob: function() {
-    var filePath = process.cwd() + '/' + argv['p'];
-    createBlob(filePath);
+
+  add: function() {
+    var path = process.cwd() + '/' + argv['p'];
+    createBlob(path);
   }
+  
 }
 
 if (commandArray.length > 0) {
