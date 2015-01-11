@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var fs = require('fs');
 var argv = require('minimist')(process.argv.slice(2));
 
@@ -7,12 +9,13 @@ var commandMap = {
   init: init
 }
 
-if (commandArray) {
+if (commandArray.length > 0) {
   commandMap[commandArray[0]]();
 }
 
 function init() {
-  var pathElements = process.cwd().split('/');
-  var currentDirectory = pathElements[pathElements.length -1];
-  console.log(currentDirectory);
+  var currentDirectoryPath = process.cwd();
+  var pathElements = currentDirectoryPath.split('/');
+  var currentDirectoryName = pathElements[pathElements.length -1];
+  console.log(currentDirectoryName);
 }
