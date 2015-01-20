@@ -3,4 +3,8 @@ function Index() {
 
 };
 
+Index.prototype.getJSON = function() {
+  return JSON.stringify(this.root);
+}
+
 module.exports = Index;
