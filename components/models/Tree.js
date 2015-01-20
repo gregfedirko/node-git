@@ -16,4 +16,16 @@ Tree.prototype.getChildren = function() {
   return this.children;
 };
 
+Tree.prototype.buildStandardizedContents = function() {
+  var type = this.type;
+  var path = this.path;
+  var children = this.getSortedChildren();
+
+  return [
+    type,
+    path,
+    children
+  ];
+}
+
 module.exports = Tree;

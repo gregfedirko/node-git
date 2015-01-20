@@ -1,16 +1,19 @@
 * Tree paths will potontially be able to be used with mkdirp to build the filestructure
 * Tree file contents will include: 
-  * name 
   * path
   * type
-  * children: [array of SHA1 hashes] !note: they will need to be sorted for consistency
+  * children: [array of SHA1 hashes with the associated name] !! note: they will need to be sorted for consistency
 
   format will be an array: so that indices are guaranteed to be in the same order: 
   [
     ['TYPE'],
-    ['NAME'],
     ['PATH'],
-    ['CHILD1HASH', ['CHILD2HASH'] ... ]
+    ['CHILD1HASH*NAME', ['CHILD2HASH*NAME'] ... ]
   ]
 
   when generating hashes recursively in the index, this format must be strictly followed.
+
+
+The working index file will be a json file.
+it contains a nested object that represents the current working tree.
+
