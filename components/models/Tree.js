@@ -24,7 +24,7 @@ Tree.prototype.getSortedChildren = function() {
     childStr = childStr + child.SHA1 + '*' + child.name;
     formattedChildren.push(childStr);
   }
-  return JSON.stringify(formattedChildren.sort());
+  return formattedChildren.sort();
 };
 
 Tree.prototype.buildStandardizedContents = function() {
@@ -32,11 +32,13 @@ Tree.prototype.buildStandardizedContents = function() {
   var path = this.path;
   var children = this.getSortedChildren();
 
-  return [
+  var contents = [
     type,
     path,
     children
   ];
+
+  return JSON.stringify(contents);
 }
 
 module.exports = Tree;

@@ -53,9 +53,8 @@ describe('Tree', function() {
 
 
     var expectedArray = ['12345*foo.js', '56789*bar.py'];
-    var stringifiedExpected = JSON.stringify(expectedArray.sort());
 
-    expect(tree.getSortedChildren()).to.equal(stringifiedExpected);
+    expect(tree.getSortedChildren()).to.deep.equal(expectedArray);
   });
 
   it('should have a method, buildStandardizedContents, which builds the trees contents', function() {
@@ -76,9 +75,9 @@ describe('Tree', function() {
     tree.addChild(blob2);
 
     var testArray = [
-      ['TREE'],
-      ['/_root/test'],
-      [12345, 123456]
+      'TREE',
+      '/_root/test',
+      ['12345*foo.js', '12346*bar.py']
     ];
 
     var stringifiedTest = JSON.stringify(testArray);
