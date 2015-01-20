@@ -61,16 +61,16 @@ describe('Index', function() {
 
       var path = '';
       recursiveCheck(index.root);
-      expect(path).to.equal('/foo/bar/blob.js');
+      expect(path).to.equal('/_root/foo/bar/blob.js');
 
       ////////
       function recursiveCheck(tree) {
-        path += '/' + tree.name;
+        path += ('/' + tree.name);
         var children = tree.getChildren();
         for (var i = 0; i < children.length; i++) {
           var child = children[i];
           if (child.isTree()) {
-            recursiveCheck(tree)
+            recursiveCheck(child);
           } else if (child.isBlob()){
             path += '/' + child.name;
           }

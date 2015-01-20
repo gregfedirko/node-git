@@ -3,7 +3,7 @@ var DbObject = require('./DbObject.js');
 function Tree(options) {
   DbObject.call(this, options);
   this.type = 'TREE';
-  this.name = options.name;
+  this.name = options.name || '_root';
   this.children = [];
 }
 Tree.prototype = Object.create(DbObject.prototype);

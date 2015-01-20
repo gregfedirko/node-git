@@ -13,7 +13,10 @@ DbObject.prototype.isTree = function() {
   return this.type === 'TREE';
 }
 
-
+DbObject.prototype.getPathArray = function() {
+  // !Assume path always starts with '/'
+  return this.path.split('/').slice(1);
+}
 
 
 
