@@ -7,7 +7,7 @@ Index.prototype.getJSON = function() {
   return JSON.stringify(this.root);
 };
 
-Index.addBlob = function(blob) {
+Index.prototype.addBlob = function(blob) {
   
   // pathQueue is just a regular JavaScript Array.
   // to dequeue, shift is utilzed.  ex: Array.shift();

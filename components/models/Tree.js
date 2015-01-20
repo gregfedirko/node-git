@@ -13,7 +13,6 @@ Tree.prototype.constructor = Tree;
 Tree.prototype.addChild = function(item) {
   this.children.push(item);
 };
-
 Tree.prototype.getChildren = function() {
   return this.children;
 };

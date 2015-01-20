@@ -1,5 +1,7 @@
 var chai = require('chai');
 var Index = require('../../components/models/Index.js');
+var Tree = require('../../components/models/Tree.js');
+var Blob = require('../../components/models/Blob.js');
  
 chai.config.includeStack = true;
 
@@ -36,6 +38,11 @@ describe('Index', function() {
   });
 
   describe('method: addBlob', function() {
+    it('should exist', function() {
+      var index = new Index();
+      expect(index.addBlob).not.to.equal.undefined
+    });
+
     it('should build the index tree path needed to insert the blob', function() {
       var index = new Index();
 
@@ -65,4 +72,5 @@ describe('Index', function() {
         }
       }
     });
+  });
 });
