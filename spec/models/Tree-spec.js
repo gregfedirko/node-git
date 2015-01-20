@@ -1,7 +1,7 @@
 var chai = require('chai');
 var Tree = require('../../components/models/Tree.js');
 var Blob = require('../../components/models/Blob.js');
-var DbObject = require('../../components/models/DbObject.js');
+var DbObject = require('../../components/utils.js');
  
 chai.config.includeStack = true;
  
@@ -85,13 +85,35 @@ describe('Tree', function() {
 
   });
 
+  it('should have a method, setSHA1, which sets the SHA1 based on relevant properties', function() {
+    var tree = new Tree({
+      path: '/_root/test'
+    });
+    var blob1 = new Blob({
+      name: 'foo.js',
+      SHA1: 12345
+    });
 
+    var blob2 = new Blob({
+      name: 'bar.py',
+      SHA1: 12346
+    });
 
+    tree.addChild(blob1);
+    tree.addChild(blob2);
 
+    var testArray = [
+      'TREE',
+      '/_root/test',
+      ['12345*foo.js', '12346*bar.py']
+    ];
 
+    var stringifiedTest = JSON.stringify(testArray);
 
+    tree.setSHA1();
 
-
+    expect(tree.SHA1).to.equal(utils.getSHA1(stringifiedTest));
+  });
 
 
 });

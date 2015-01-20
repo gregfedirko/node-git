@@ -1,4 +1,5 @@
 var DbObject = require('./DbObject.js');
+var utils = require('../utils.js');
 
 function Tree(options) {
   DbObject.call(this, options);
