@@ -1,8 +1,6 @@
-{
-  blobs: [
+function Index() {
+  this.root = {};
 
-  ],
-  trees: [
-    
-  ],
-}
+};
+
+module.exports = Index;

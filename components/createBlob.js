@@ -7,15 +7,10 @@
 
 
 var fs = require('fs');
-var crypto = require('crypto');
 var zlib = require('zlib');
 var mkdirp = require('mkdirp');
+var utils = require('./utils');
 
-function getSHA1(data) {
-  var shasum = crypto.createHash('sha1');
-  shasum.update(data);
-  return shasum.digest('hex');
-}
 
 function createBlob(filePath) {
   // git command must be executed from the root directory
@@ -30,7 +25,7 @@ function createBlob(filePath) {
 
   s.on('end', function() {
 
-    var sha1 = getSHA1(fileContent);
+    var sha1 = utils.getSHA1(fileContent);
 
     var blobDirectory = sha1.slice(0,2);
     var blobName = sha1.slice(2);
