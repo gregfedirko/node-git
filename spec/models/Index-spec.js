@@ -15,6 +15,11 @@ global.assert = chai.assert;
 
 describe('Index', function() {
 
+  it('should initialize with a property root, which is an instance of Tree', function() {
+    var index = new Index();
+    expect(index.root instanceof Tree).to.be.true;
+  });
+
   describe('method: getJSON', function() {
 
     it('should exist', function() {
@@ -47,7 +52,7 @@ describe('Index', function() {
       var index = new Index();
 
       var blob = new Blob({
-        pathTo: '/foo/bar',
+        path: '/foo/bar',
         name: 'blob.js',
         SHA1: '0123456789012345678901234567890123456789'
       });
@@ -55,7 +60,7 @@ describe('Index', function() {
       index.addBlob(blob);
 
       var path = '';
-      recursiveCheck(index);
+      recursiveCheck(index.root);
       expect(path).to.equal('/foo/bar/blob.js');
 
       ////////

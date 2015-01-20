@@ -1,3 +1,5 @@
+var Tree = require('./Tree.js');
+
 function Index() {
   this.root = {};
 
@@ -9,7 +11,7 @@ Index.prototype.getJSON = function() {
 
 Index.prototype.addBlob = function(blob) {
   
-  // pathQueue is just a regular JavaScript Array.
+  // pathQueue is just a regular JavaScript Array, used as a Queue.
   // to dequeue, shift is utilzed.  ex: Array.shift();
   var pathQueue = blob.getPathArray();
 
