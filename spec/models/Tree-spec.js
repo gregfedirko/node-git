@@ -1,7 +1,8 @@
 var chai = require('chai');
 var Tree = require('../../components/models/Tree.js');
 var Blob = require('../../components/models/Blob.js');
-var DbObject = require('../../components/utils.js');
+var DbObject = require('../../components/models/DbObject.js');
+var utils = require('../../components/utils.js');
  
 chai.config.includeStack = true;
  

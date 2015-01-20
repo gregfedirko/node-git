@@ -40,6 +40,11 @@ Tree.prototype.buildStandardizedContents = function() {
   ];
 
   return JSON.stringify(contents);
-}
+};
+
+Tree.prototype.setSHA1 = function() {
+  var standardizedContents = this.buildStandardizedContents();
+  this.SHA1 = utils.getSHA1(standardizedContents);
+};
 
 module.exports = Tree;
