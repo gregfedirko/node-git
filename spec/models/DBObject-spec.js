@@ -46,6 +46,28 @@ describe('DbObject', function() {
     var path = dbObject.getPathArray();
 
     expect(path).to.deep.equal(['foo', 'bar', 'baz']);
-  })
+  });
+
+  it('should have a method getSHA1, that returns the objects hash', function() {
+    var dbObject = new DbObject({
+      SHA1: '12345'
+    });
+    expect(dbObject.getSHA1()).to.equal('12345');
+  });
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

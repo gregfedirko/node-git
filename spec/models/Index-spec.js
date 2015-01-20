@@ -77,5 +77,84 @@ describe('Index', function() {
         }
       }
     });
+
+    it('should clear all hashes of existing trees on the way to blob insert operation', function() {
+      var index = new Index();
+
+      var blob = new Blob({
+        path: '/foo/bar',
+        name: 'blob.js',
+        SHA1: '0123456789012345678901234567890123456789'
+      });
+
+      // add a blob
+      index.addBlob(blob);
+      //generate tree hashes for the entire tree
+      index.generateTreeHashes();
+
+      var blob2 = new Blob({
+        path: '/foo/bar',
+        name: 'blob.js',
+        SHA1: '0123456789012345678902945567890123456789'
+      });
+      // insert another blob, which should clear all trees to this path, 
+      // since they are no longer valid for the new tree strucure
+      index.addBlob(blob2);
+
+      var SHA1List = [];
+      recursiveCheck(index.root);
+      expect(path).to.equal('/_root/foo/bar/blob.js');
+
+      ////////
+      function recursiveCheck(tree) {
+        SHA1List.push(tree.SHA1);
+        var children = tree.getChildren();
+        for (var i = 0; i < children.length; i++) {
+          var child = children[i];
+          if (child.isTree()) {
+            recursiveCheck(child);
+          } else if (child.isBlob()){
+            path += '/' + child.name;
+          }
+        }
+      }
+    });
+
+    it('should overwrite the hash of an existing blob', function() {
+      var index = new Index();
+
+      var blob = new Blob({
+        path: '/foo/bar',
+        name: 'blob.js',
+        SHA1: '0123456789012345678901234567890123456789'
+      });
+
+      index.addBlob(blob);
+
+      var blob = new Blob({
+        path: '/foo/bar',
+        name: 'blob.js',
+        SHA1: 'ABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDE'
+      });
+
+      index.addBlob(blob);
+
+
+      var newSHA1 = recursiveCheck(index.root);
+      expect(newSHA1).to.equal('ABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDE');
+
+      ////////
+      function recursiveCheck(tree) {
+        var children = tree.getChildren();
+        for (var i = 0; i < children.length; i++) {
+          var child = children[i];
+          if (child.isTree()) {
+            return recursiveCheck(child);
+          } else if (child.isBlob()){
+            return child.SHA1;
+          }
+        }
+      }
+    });
   });
 });

@@ -1,0 +1,16 @@
+* Tree paths will potontially be able to be used with mkdirp to build the filestructure
+* Tree file contents will include: 
+  * name 
+  * path
+  * type
+  * children: [array of SHA1 hashes] !note: they will need to be sorted for consistency
+
+  format will be an array: so that indices are guaranteed to be in the same order: 
+  [
+    ['TYPE'],
+    ['NAME'],
+    ['PATH'],
+    ['CHILD1HASH', ['CHILD2HASH'] ... ]
+  ]
+
+  when generating hashes recursively in the index, this format must be strictly followed.
