@@ -31,6 +31,6 @@ describe('Tree', function() {
     tree.addChild('test');
     tree.addChild('foo');
     var children = tree.getChildren();
-    expect(children).to.equal(['test', 'foo']);
+    expect(children).to.deep.equal(['test', 'foo']);
   });
 });
