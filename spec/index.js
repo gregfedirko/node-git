@@ -13,7 +13,13 @@ global.assert = chai.assert;
 
 describe('Index', function() {
 
-  describe('Get JSON', function() {
+  describe('method: getJSON', function() {
+
+    it('should exist', function() {
+      var index = new Index();
+      expect(index.getJSON).not.to.be.undefined;
+    });
+
     it('should return a valid JSON string', function() {
       var index = new Index();
       var testObject = {
@@ -28,5 +34,5 @@ describe('Index', function() {
       assert.equal(testJSON, indexGeneratedJSON);
     });
   });
-  
+
 });
