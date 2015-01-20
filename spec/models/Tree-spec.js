@@ -36,7 +36,7 @@ describe('Tree', function() {
   });
 
   it ('should have a method, getSortedChildren, that returns formatted children', function() {
-    var tree = new Tree();
+    var tree = new Tree({});
     var blob1 = new Blob({
       name: 'foo.js',
       SHA1: 12345
@@ -47,8 +47,10 @@ describe('Tree', function() {
       SHA1: 56789
     });
 
+    console.log('TJFKVGLHBJLKLJV')
     tree.addChild(blob1);
     tree.addChild(blob2);
+
 
     var expectedArray = ['12345*foo.js', '56789*bar.py'];
     var stringifiedExpected = JSON.stringify(expectedArray.sort());
