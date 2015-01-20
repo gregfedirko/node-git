@@ -11,7 +11,7 @@ Index.prototype.addBlob = function(blob) {
   
   // pathQueue is just a regular JavaScript Array.
   // to dequeue, shift is utilzed.  ex: Array.shift();
-  var pathQueue = blob.getPathQueue();
+  var pathQueue = blob.getPathArray();
 
   function subRoutine(tree, pathQueue, blob) {
     if (pathQueue.length <= 0) {

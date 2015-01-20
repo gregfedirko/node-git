@@ -38,4 +38,14 @@ describe('DbObject', function() {
     expect(tree.isBlob()).to.be.false;
   });
 
+  it('should have a method, getPathArray, that returns an Array representing the path', function() {
+    var dbObject = new DbObject({
+      path: '/foo/bar/baz'
+    });
+
+    var path = dbObject.getPathArray();
+
+    expect(path).to.deep.equal(['foo', 'bar', 'baz']);
+  })
+
 });
