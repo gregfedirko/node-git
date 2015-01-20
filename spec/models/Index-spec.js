@@ -97,7 +97,7 @@ describe('Index', function() {
         name: 'blob.js',
         SHA1: '0123456789012345678902945567890123456789'
       });
-      // insert another blob, which should clear all trees to this path, 
+      // insert another blob, which should clear all tree Hashes to this path, 
       // since they are no longer valid for the new tree strucure
       index.addBlob(blob2);
 

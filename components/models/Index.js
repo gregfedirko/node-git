@@ -35,4 +35,8 @@ Index.prototype.addBlob = function(blob) {
 
 };
 
+Index.prototype.generateTreeHashes = function() {
+  this.root.generateTreeHashes();
+};
+
 module.exports = Index;

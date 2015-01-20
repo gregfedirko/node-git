@@ -2,6 +2,7 @@ var chai = require('chai');
 var Tree = require('../../components/models/Tree.js');
 var Blob = require('../../components/models/Blob.js');
 var DbObject = require('../../components/models/DbObject.js');
+var Index = require('../../components/models/Index.js');
 var utils = require('../../components/utils.js');
  
 chai.config.includeStack = true;
@@ -114,6 +115,40 @@ describe('Tree', function() {
     tree.setSHA1();
 
     expect(tree.SHA1).to.equal(utils.getSHA1(stringifiedTest));
+  });
+
+  it('should have a method: generateTreeHashes, that recursively generates Hashes in a Tree', function() {
+    var index = new Index();
+
+    var blob = new Blob({
+      path: '/foo/bar',
+      name: 'blob.js',
+      SHA1: '0123456789012345678901234567890123456789'
+    });
+
+    // add a blob
+    index.addBlob(blob);
+    //generate tree hashes for the entire tree
+    index.generateTreeHashes();
+
+    var SHA1List = [];
+    recursiveCheck(index.root);
+
+    // console.log('#############', SHA1List);
+    var test = (SHA1List.length === 3) && (SHA1List[0] !== undefined) && (SHA1List[1] !== undefined) && (SHA1List[2] !== undefined);
+    expect(test).to.be.true;
+
+    ////////
+    function recursiveCheck(tree) {
+      SHA1List.push(tree.SHA1);
+      var children = tree.getChildren();
+      for (var i = 0; i < children.length; i++) {
+        var child = children[i];
+        if (child.isTree()) {
+          recursiveCheck(child);
+        } 
+      }
+    }
   });
 
 
