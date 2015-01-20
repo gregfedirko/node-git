@@ -24,5 +24,13 @@ describe('Tree', function() {
     var tree = new Tree({});
     tree.addChild('test');
     expect(tree.children.length).to.equal(1);  
-  })
+  });
+
+  it('should be able to return an array of children', function() {
+    var tree = new Tree({});
+    tree.addChild('test');
+    tree.addChild('foo');
+    var children = tree.getChildren();
+    expect(children).to.equal(['test', 'foo']);
+  });
 });
