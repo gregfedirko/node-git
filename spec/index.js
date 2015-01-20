@@ -1,5 +1,5 @@
 var chai = require('chai');
-var Index = require('../components/Index.js');
+var Index = require('../components/models/Index.js');
  
 chai.config.includeStack = true;
 
