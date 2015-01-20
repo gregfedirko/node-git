@@ -1,5 +1,7 @@
 var chai = require('chai');
 var DbObject = require('../../components/models/DbObject.js');
+var Tree = require('../../components/models/Tree.js');
+var Blob = require('../../components/models/Blob.js');
  
 chai.config.includeStack = true;
  
@@ -15,4 +17,25 @@ describe('DbObject', function() {
     });
     expect(dbObject.SHA1).to.not.be.undefined;
   });
+
+  it('should have a method, isTree, that returns true for a tree object', function() {
+    var tree = new Tree({});
+    expect(tree.isTree()).to.be.true;
+  });
+
+  it('should have a method, isTree, that returns false for a non-tree object', function() {
+    var blob = new Blob({});
+    expect(blob.isTree()).to.be.false;
+  });
+
+  it('should have a method, isBlob, that returns true for a blob object', function() {
+    var blob = new Blob({});
+    expect(blob.isBlob()).to.be.true;
+  });
+
+  it('should have a method, isBlob, that returns true for a non-blob object', function() {
+    var tree = new Tree({});
+    expect(tree.isTree()).to.be.false;
+  });
+
 });
