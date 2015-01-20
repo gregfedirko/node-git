@@ -33,9 +33,9 @@ describe('DbObject', function() {
     expect(blob.isBlob()).to.be.true;
   });
 
-  it('should have a method, isBlob, that returns true for a non-blob object', function() {
+  it('should have a method, isBlob, that returns false for a non-blob object', function() {
     var tree = new Tree({});
-    expect(tree.isTree()).to.be.false;
+    expect(tree.isBlob()).to.be.false;
   });
 
 });
