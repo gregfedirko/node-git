@@ -47,6 +47,10 @@ Tree.prototype.setSHA1 = function() {
   this.SHA1 = utils.getSHA1(standardizedContents);
 };
 
+Tree.prototype.clearSHA1 = function() {
+  this.SHA1 = null;
+};
+
 Tree.prototype.generateTreeHashes = function() {
   // loop through children 
   // recursively visit each one

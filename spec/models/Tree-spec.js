@@ -151,5 +151,15 @@ describe('Tree', function() {
     }
   });
 
+  it('should have a method clearSHA1 that sets existing SHA1 to null', function() {
+    var tree = new Tree({
+      SHA1: '12345'
+    });
+
+    tree.clearSHA1();
+
+    expect(tree.SHA1).to.be.null;
+  });
+
 
 });

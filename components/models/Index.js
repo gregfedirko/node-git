@@ -17,17 +17,31 @@ Index.prototype.addBlob = function(blob) {
   subRoutine(this.root, pathQueue, blob);
 
   function subRoutine(tree, pathQueue, blob) {
+    tree.clearSHA1();
     if (pathQueue.length <= 0) {
       tree.addChild(blob);
       return;
     }
 
     nextTreeName = pathQueue.shift();
-    var nextTree = new Tree({
-      name: nextTreeName
-    });
 
-    tree.addChild(nextTree);
+    var nextTree;
+    var i = 0;
+    while (nextTree === undefined && i < tree.children.length) {
+      var child = tree.children[i];
+      if (child.name === nextTreeName) {
+        nextTree = child;
+      }
+      i++;
+    }
+    
+    if (nextTree === undefined) {
+      nextTree = new Tree({
+        name: nextTreeName
+      });
+      tree.addChild(nextTree);
+    }
+
 
     subRoutine(nextTree, pathQueue, blob);
 

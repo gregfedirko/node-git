@@ -103,7 +103,8 @@ describe('Index', function() {
 
       var SHA1List = [];
       recursiveCheck(index.root);
-      expect(path).to.equal('/_root/foo/bar/blob.js');
+
+      expect(SHA1List).to.deep.equal([null, null, null]);
 
       ////////
       function recursiveCheck(tree) {
@@ -113,9 +114,7 @@ describe('Index', function() {
           var child = children[i];
           if (child.isTree()) {
             recursiveCheck(child);
-          } else if (child.isBlob()){
-            path += '/' + child.name;
-          }
+          } 
         }
       }
     });

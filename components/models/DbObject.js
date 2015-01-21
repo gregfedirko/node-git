@@ -1,7 +1,7 @@
 module.exports = DbObject;
 
 function DbObject(options) {
-  this.SHA1 = options.SHA1;
+  this.SHA1 = options.SHA1 || null;
   this.path = options.path;
 };
 
