@@ -29,12 +29,44 @@ describe('Tree', function() {
     expect(tree.children.length).to.equal(1);  
   });
 
+  it('addChildren should replace existing children of the same name', function() {
+    var tree = new Tree({});
+
+    var blob = new Blob({
+      name: 'test.js',
+      SHA1: '12345'
+    });
+
+    tree.addChild(blob);
+
+    var blob2 = new Blob({
+      name: 'test.js',
+      SHA1: '67891'
+    })
+
+    tree.addChild(blob2);
+
+    // test length: 
+    var lengthTest = tree.children.length === 1;
+    var SHA1Test = tree.children[0].SHA1 === '67891';
+
+    expect(lengthTest && SHA1Test).to.be.true;
+  });
+
   it('should be able to return an array of children', function() {
     var tree = new Tree({});
-    tree.addChild('test');
-    tree.addChild('foo');
+    var blob1 = new Blob({
+      name: 'foo'
+    });
+
+    var blob2 = new Blob({
+      name: 'bar'
+    });
+
+    tree.addChild(blob1);
+    tree.addChild(blob2);
     var children = tree.getChildren();
-    expect(children).to.deep.equal(['test', 'foo']);
+    expect(children.length).to.equal(2);
   });
 
   it ('should have a method, getSortedChildren, that returns formatted children', function() {

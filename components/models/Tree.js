@@ -10,9 +10,18 @@ function Tree(options) {
 Tree.prototype = Object.create(DbObject.prototype);
 Tree.prototype.constructor = Tree;
 
+// assume item is a DbObject
 Tree.prototype.addChild = function(item) {
+  for (var i = 0; i < this.children.length; i++) {
+    var child = this.children[i];
+    if (child.name === item.name) {
+      this.children[i] = item;
+      return;
+    }
+  } 
   this.children.push(item);
 };
+
 Tree.prototype.getChildren = function() {
   return this.children;
 };
