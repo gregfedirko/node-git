@@ -1,3 +1,5 @@
+// A test implementation of create blob, it is not synced with the existing models yet
+
 // read file from path
 // sha1 hash the file
 // create a dir if one does not exist named by the two first characters of the hash
